@@ -13,6 +13,7 @@ const initialInvestmentData = {
 function App() {
   const [investmentValue, setInvestmentValue] = useState(initialInvestmentData);
 
+  const investmentValueIsValid = investmentValue.duration > 0;
 
   const handleInvestmentChange = (event) => {
       setInvestmentValue(prevInvestmentValue => {
@@ -22,15 +23,13 @@ function App() {
       console.log(investmentValue)
   }
 
-  useEffect(() => {
-      console.log(investmentValue);
-  }, [investmentValue]);
-
   
   return (
     <div>
       <UserInput investmentValue={investmentValue} handleInvestmentChange={handleInvestmentChange} />
-      <Result />
+      {!investmentValueIsValid && <p className='center'>Please, insert a duration greater than 0.</p>}
+      {investmentValueIsValid && <Result investmentValue={investmentValue} />}
+      
     </div>
   )
 }
