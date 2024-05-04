@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import UserInput from "./components/UserInput"
 import Result from "./components/Result"
 
@@ -11,12 +11,25 @@ const initialInvestmentData = {
 }
 
 function App() {
-  const [investmentData, setInvestmentData] = useState({});
+  const [investmentValue, setInvestmentValue] = useState(initialInvestmentData);
+
+
+  const handleInvestmentChange = (event) => {
+      setInvestmentValue(prevInvestmentValue => {
+          return {...prevInvestmentValue,
+                  [event.target.id]: Number(event.target.value)}
+      })
+      console.log(investmentValue)
+  }
+
+  useEffect(() => {
+      console.log(investmentValue);
+  }, [investmentValue]);
 
   
   return (
     <div>
-      <UserInput initialInvestmentData={initialInvestmentData} />
+      <UserInput investmentValue={investmentValue} handleInvestmentChange={handleInvestmentChange} />
       <Result />
     </div>
   )

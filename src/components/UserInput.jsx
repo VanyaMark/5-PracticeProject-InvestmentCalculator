@@ -1,21 +1,8 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 
-const UserInput = ({initialInvestmentData}) => {
-    const [investmentValue, setInvestmentValue] = useState(initialInvestmentData);
-
-
-    const handleInvestmentChange = (event) => {
-        setInvestmentValue(prevInvestmentValue => {
-            return {...prevInvestmentValue,
-                    [event.target.id]: Number(event.target.value)}
-        })
-        console.log(investmentValue)
-    }
-
-    useEffect(() => {
-        console.log(investmentValue);
-    }, [investmentValue]);
+const UserInput = ({investmentValue, handleInvestmentChange}) => {
+    
 
   return (
     <section id="user-input">
